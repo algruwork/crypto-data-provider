@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "crypto-data-provider"
+version = "0.1.0"
+description = ""
+authors = ["Aleksei Gruzdev <algruwork@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.103.1"
+uvicorn = "^0.23.2"
+pydantic-settings = "^2.0.3"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.1"
+httpx = "^0.24.1"
+pylint = "^2.17.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

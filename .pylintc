@@ -1,0 +1,4 @@
+[MASTER]
+extension-pkg-allow-list=pydantic,fastapi
+[FORMAT]
+max-line-length=120
