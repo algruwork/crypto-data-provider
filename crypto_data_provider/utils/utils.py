@@ -1,3 +1,4 @@
+# Utils module
 from datetime import datetime
 
 
@@ -6,11 +7,13 @@ MINUTES_IN_HOURS = 60
 HOURS_IN_DAY = 24
 
 
-def datetime_as_int(datetime: datetime) -> int:
-    return int(round(datetime.timestamp()))
+def datetime_as_int(value: datetime) -> int:
+    """Convert datetime to int"""
+    return int(round(value.timestamp()))
 
 
 def timeframe_to_seconds(timeframe: str) -> int:
+    """Convert timeframe like 15m to seconds"""
     try:
         timeframe_without_str_part = int(timeframe[:-1:])
 
@@ -28,11 +31,12 @@ def timeframe_to_seconds(timeframe: str) -> int:
                 raise ValueError(f'Got unexpected valuse {timeframe}. Expects values like 5m, 1h, 3d')
     except ValueError:
         print(f'Got unexpected value {timeframe}. Expects values like 5m, 1h, 3d')
-    except Exception as ex:
-        print(f'Got unexpected error: {ex}')
 
 
-def get_count_timeframes(start: datetime, end: datetime, timeframe: str = '15m') -> int:
+def get_count_timeframes(start: datetime,
+                         end: datetime,
+                         timeframe: str = '15m') -> int:
+    """Convert time period to count timeframes"""
     return int((datetime_as_int(end) - datetime_as_int(start)) / timeframe_to_seconds(timeframe))
 
 
@@ -40,7 +44,11 @@ def get_count_timeframes(start: datetime, end: datetime, timeframe: str = '15m')
 #     return int(get_count_timeframes(start, end, timeframe) / rate_limit) + 1 # +1 для нецелых timeframe
 
 
-def get_time_points(start: datetime, end: datetime, timeframe: str = '15m', rate_limit: int = 100) -> list[int]:
+def get_time_points(start: datetime,
+                    end: datetime,
+                    timeframe: str = '15m',
+                    rate_limit: int = 100) -> list[int]:
+    """Calculate time points to request"""
     timeframes = []
     for t in range(get_count_timeframes(start, end, timeframe)):
         value = datetime_as_int(end) - t * timeframe_to_seconds(timeframe)
