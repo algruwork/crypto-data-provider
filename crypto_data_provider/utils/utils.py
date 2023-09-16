@@ -1,4 +1,4 @@
-# Utils module
+"""Utils module"""
 from datetime import datetime
 
 
