@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+
+  prices_db:
+    container_name: prices_db
+    image: postgres:16rc1-alpine3.18
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=prices_db_pass
+      - POSTGRES_DB=prices
+
+  app: # Command not found: uvicorn
+    container_name: app
+    build: .
+    # command: bash -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+    ports:
+      - 8000:8000
+    environment:
+      - MAIN_URL=/
+      - ENV=DEV
+    depends_on:
+      - prices_db
+    restart: always

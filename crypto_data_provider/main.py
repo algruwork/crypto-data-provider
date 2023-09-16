@@ -8,6 +8,10 @@ from .settings import settings
 from .models.status import Status
 from .models.candlestick import Candlestick
 from .services.market import get_history_candlesticks
+from .utils.logging import setup_logging
+
+# set up logging
+logger = setup_logging()
 
 app = FastAPI()
 
@@ -27,7 +31,7 @@ async def get_ticker() -> list[str]:
 @app.get('/candlesticks/{ticker}')
 async def get_candlesticks(ticker: str,
                            start: datetime,
-                           end: datetime = datetime.now) -> list[Candlestick]:
+                           end: datetime = datetime.utcnow()) -> list[Candlestick]:
     """Get candlesticks"""
     raw_candlesticks = get_history_candlesticks(ticker, start, end)
     candlesticks = []
