@@ -1,3 +1,4 @@
 crypto-data-provider/.pytest_cache
 crypto-data-provider/crypto_data_provider/__pycache__
 crypto-data-provider/tests/__pycache__
+.env

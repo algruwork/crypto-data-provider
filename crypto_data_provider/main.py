@@ -42,7 +42,7 @@ async def status():
 @app.get('/tickers', response_model=list[str])
 async def get_ticker() -> list[str]:
     """Get tickers"""
-    return ['ETH_USDT']
+    return ['ETH-USDT']
 
 
 @app.get('/candlesticks/{ticker}', response_model=list[Candlestick])

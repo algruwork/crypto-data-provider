@@ -8,10 +8,7 @@ services:
     restart: always
     ports:
       - 5432:5432
-    environment:
-      - POSTGRES_USER=app
-      - POSTGRES_PASSWORD=prices_db_pass
-      - POSTGRES_DB=prices
+    env_file: .env
 
   app: # Command not found: uvicorn
     container_name: app
@@ -22,6 +19,7 @@ services:
     environment:
       - MAIN_URL=/
       - ENV=DEV
+    env_file: .env
     depends_on:
       - prices_db
     restart: always

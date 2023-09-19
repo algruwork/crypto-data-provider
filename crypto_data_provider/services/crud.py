@@ -12,6 +12,8 @@ def get_candlestick(db: Session, start: int, end: int):
 
 def save_candlestick(db: Session, candlesticks: list[candlestick.Candlestick]):
     """Save candlestick to db"""
+    if len(candlesticks) == 0:
+        return False
     rows = []
     for candle in candlesticks:
         row = models.Candlestick(
